@@ -16,7 +16,7 @@ function App(){
         <Router>
             <Navbar />
             <Routes basename={"https://news-letter-frontend.onrender.com"}>
-                <Route exact path="/" element={<FrontPage />} />
+                <Route exact path="" element={<FrontPage />} />
                 <Route exact path="/login" element={<LoginPage />} />
                 <Route exact path="/register" element={<RegiserPage />} />
                 <Route exact path="/edit" element={<Edit />} />
