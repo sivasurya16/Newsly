@@ -91,7 +91,6 @@ router.post('/user',async (req, res) => {
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
   const User = db.collection("creds");
-  console.log(req.body)
   try {
     // check if the user exists
     let user = await User.findOne({ email:email });

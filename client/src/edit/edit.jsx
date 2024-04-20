@@ -12,13 +12,11 @@ function edit(){
     
     function handleTitleChange(event) {
         setTitle(event.target.value);
-        console.log(title)
     }
 
 
     function handleTextChange(event) {
         setText(event.target.value);
-        console.log(text)
     }
     async function handleSave(){
         const token = localStorage.getItem('token');
@@ -29,7 +27,6 @@ function edit(){
             "itemTitle":title,
             "itemText":text
         })
-        console.log(raw)
         const requestOptions = {
             method: "PATCH",
             headers: myHeaders,
