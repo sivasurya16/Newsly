@@ -1,0 +1,9 @@
+.Subtitle {
+    margin-left: 5vw;
+}
+
+.news-section {
+    display: flex;
+    margin-left: 30px;
+    flex-direction: column;
+}
