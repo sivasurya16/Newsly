@@ -36,7 +36,7 @@ function edit(){
             body: raw,
             redirect: "follow"
         };
-        const res = await fetch(`http://localhost:5050/record/${id}`,requestOptions)
+        const res = await fetch(`https://news-letter-yynp.onrender.com/record/${id}`,requestOptions)
         
         
         if (res.status== 200){

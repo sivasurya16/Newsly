@@ -72,7 +72,7 @@ const Login = (props) => {
             onButtonClick(event);
             await logIn(email,password);
             if (isAuthenticated){
-              window.alert("Logged in successfully")
+              alert("Logged in successfully")
             }
           }} value={'Log in'} />
       </div>

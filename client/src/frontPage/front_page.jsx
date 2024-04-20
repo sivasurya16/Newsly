@@ -16,7 +16,7 @@ function frontPage(){
 
     useEffect(() => {
       function getRecords() {
-        axios.get('http://localhost:5050/record/', {
+        axios.get('https://news-letter-yynp.onrender.com/record/', {
             headers: { "x-auth-token": localStorage.getItem("token") }
         })
         .then(response => {
