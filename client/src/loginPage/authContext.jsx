@@ -41,7 +41,7 @@ export const AuthProvider = ({ children }) => {
 
     if (token) {
       try {
-        const res = await axios.get(`http://localhost:5050/record/user/info`,{
+        const res = await axios.get(`https://news-letter-yynp.onrender.com/record/user/info`,{
           headers: {
             'x-auth-token': token
           }
@@ -78,7 +78,7 @@ export const AuthProvider = ({ children }) => {
     };
     const body = JSON.stringify({ email, password });
     try {
-      const res = await axios.post(`http://localhost:5050/record/login`, body, config);
+      const res = await axios.post(`https://news-letter-yynp.onrender.com/record/login`, body, config);
       localStorage.setItem('token', res.data.token);
       await getUserInfo();
     } catch (err) {
@@ -93,7 +93,7 @@ export const AuthProvider = ({ children }) => {
     const body = JSON.stringify({ email, password });
 
     try {
-      const res = await axios.post(`http://localhost:5050/record/user`, body, config);
+      const res = await axios.post(`https://news-letter-yynp.onrender.com/record/user`, body, config);
       localStorage.setItem('token', res.data.token);
       await getUserInfo();
       window.alert("registered successful");
