@@ -9,7 +9,7 @@
     "start-server": "cd server && npm run start",
     "install-client": "cd client && npm install",
     "build-client": "cd client && npm run build",
-    "start-client": "cd client && npm run dev"
+    "start-client": "cd client && npm run dev --host"
   },
   "keywords": [],
   "author": "",

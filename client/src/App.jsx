@@ -10,15 +10,16 @@ import {
 } from "react-router-dom";
 
 
+
 function App(){
     return (
         <Router>
             <Navbar />
-            <Routes>
+            <Routes basename={"https://news-letter-frontend.onrender.com"}>
                 <Route exact path="/" element={<FrontPage />} />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/register" element={<RegiserPage />} />
-                <Route path="/edit" element={<Edit />} />
+                <Route exact path="/login" element={<LoginPage />} />
+                <Route exact path="/register" element={<RegiserPage />} />
+                <Route exact path="/edit" element={<Edit />} />
             </Routes>
         </Router>
     )
