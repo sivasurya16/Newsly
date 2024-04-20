@@ -3,17 +3,17 @@ import LoginPage from "./loginPage/login"
 import RegiserPage from "./loginPage/register"
 import Navbar from "./navbar/Navbar";
 import Edit from "./edit/edit";
-// import {
-//     BrowserRouter as Router,
-//     Routes,
-//     Route,
-// } from "react-router-dom";
-
 import {
-    HashRouter as Router,
+    BrowserRouter as Router,
     Routes,
-    Route
-} from "react-router-dom"
+    Route,
+} from "react-router-dom";
+
+// import {
+//     HashRouter as Router,
+//     Routes,
+//     Route
+// } from "react-router-dom"
 
 
 function App(){
