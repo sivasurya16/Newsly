@@ -8,7 +8,7 @@ const Login = (props) => {
   const [password, setPassword] = useState('')
   const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState('')
-  const {logIn} = useAuth();
+  const {logIn,isAuthenticated} = useAuth();
   
   const onButtonClick = (e) => {
     e.preventDefault();
@@ -36,8 +36,6 @@ const Login = (props) => {
       setPasswordError('The password must be 8 characters or longer')
       return
     }
-    // console.log(email,password)
-    // console.log(isAuthenticated);
 
   }
   
@@ -73,6 +71,9 @@ const Login = (props) => {
         <input className={'inputButton'} type="button" onClick={async (event)=>{
             onButtonClick(event);
             await logIn(email,password);
+            if (isAuthenticated){
+              window.alert("Logged in successfully")
+            }
           }} value={'Log in'} />
       </div>
     </div>
