@@ -6,7 +6,13 @@ function container(props){
     const { _id, section, itemTitle, itemText, itemLink, tags, createdDate, submitter, updates, published, publishedDate, email } = props.article;
     
     async function handleDelete(){
-        const res = await fetch(`https://news-letter-yynp.onrender.com/record/${_id}`,{method:"delete"})
+        const token = localStorage.getItem("token")
+        const res = await fetch(`https://news-letter-yynp.onrender.com/record/${_id}`,{
+            method:"delete",
+            headers : {
+                "x-auth-token" : token
+            }
+        })
         if (res.status == 200){
             window.alert("You deleted the article")
             props.change();
