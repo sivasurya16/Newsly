@@ -4,9 +4,10 @@ import "./front_page.css"
 import NewsFlash from "./news_flash.jsx"
 import axios from "axios"
 import Edit from "../modify/edit.jsx"
+import useAuth from "../loginPage/useAuth.jsx"
 
 function frontPage(){
-    
+    const {isAdmin} = useAuth()
     const [records,setRecords] = useState([]);
     const [toggle,setToggle] = useState(false);
 
@@ -35,21 +36,21 @@ function frontPage(){
         return;
       }, [records.length,toggle]);
     return (
-        <>
+        <div className="front-page">
         <div className="Subtitle">
             <h1>Get your news quickly</h1>
-            <p>Here is what you need to know this week</p>
+            
             {/* Last updated need to add */}
         </div>
         <div className="news-section">
             <h2>News you can use</h2>
+            {isAdmin && <a className="post-button" href="./create"><button>Create a post</button></a>}
             
             {records.map(article => (
                 <NewsFlash key={article._id} article={article} change={handleUpdate} />
             ))}
         </div>
-        <a href="./create"><button>Create a post</button></a>
-        </>
+        </div>
     )
 }
 

@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import "./login.css"
 import useAuth from './useAuth'
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+
 
 const Login = (props) => {
   const [email, setEmail] = useState('')
@@ -9,6 +10,7 @@ const Login = (props) => {
   const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState('')
   const {logIn,isAuthenticated} = useAuth();
+  const navigateTo = useNavigate();
   
   const onButtonClick = (e) => {
     e.preventDefault();
@@ -71,10 +73,8 @@ const Login = (props) => {
         <input className={'inputButton'} type="button" onClick={async (event)=>{
             onButtonClick(event);
             await logIn(email,password);
-            if (isAuthenticated){
-              alert("Logged in successfully")
-            }
           }} value={'Log in'} />
+          {isAuthenticated && navigateTo("/") }
       </div>
     </div>
    

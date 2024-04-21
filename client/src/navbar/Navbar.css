@@ -2,6 +2,19 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: #1a1a1a;
+    color: white;
+}
+.Navbar-button-container button{
+    background-color: #008CBA;
+}
+
+.Navbar-button-container button:hover {
+    border-color: white;
+}
+.Navbar-button-container button:focus,
+button:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
 }
 
 .Navbar-logo {

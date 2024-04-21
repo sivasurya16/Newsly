@@ -4,6 +4,7 @@ import RegiserPage from "./loginPage/register"
 import Navbar from "./navbar/Navbar";
 import Edit from "./modify/edit";
 import Create from "./modify/create";
+import './index.css'
 import {
     BrowserRouter as Router,
     Routes,
