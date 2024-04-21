@@ -3,7 +3,7 @@ import Navbar from "../navbar/Navbar.jsx"
 import "./front_page.css"
 import NewsFlash from "./news_flash.jsx"
 import axios from "axios"
-import Edit from "../edit/edit.jsx"
+import Edit from "../modify/edit.jsx"
 
 function frontPage(){
     
@@ -48,7 +48,7 @@ function frontPage(){
                 <NewsFlash key={article._id} article={article} change={handleUpdate} />
             ))}
         </div>
-        
+        <a href="./create"><button>Create a post</button></a>
         </>
     )
 }

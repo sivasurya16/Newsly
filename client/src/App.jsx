@@ -2,7 +2,8 @@ import FrontPage from  "./frontPage/front_page"
 import LoginPage from "./loginPage/login"
 import RegiserPage from "./loginPage/register"
 import Navbar from "./navbar/Navbar";
-import Edit from "./edit/edit";
+import Edit from "./modify/edit";
+import Create from "./modify/create";
 import {
     BrowserRouter as Router,
     Routes,
@@ -18,6 +19,7 @@ function App(){
                 <Route exact path="/login" element={<LoginPage />} />
                 <Route exact path="/register" element={<RegiserPage />} />
                 <Route exact path="/edit" element={<Edit />} />
+                <Route exact path="/create" element={< Create/>} />
             </Routes>
         </Router>
     )

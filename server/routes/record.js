@@ -32,14 +32,23 @@ router.get("/:id", async (req, res) => {
 
 // This section will help you create a new record.
 router.post("/", auth,async (req, res) => {
+  var decoded = jwt.verify(req.headers["x-auth-token"],process.env.JWT_SECRET)
   try {
     let newDocument = {
-      name: req.body.name,
-      position: req.body.position,
-      level: req.body.level,
+      "section" : req.body.section,
+      "tags":req.body.tags,
+      "createdDate": req.body.createdDate,
+      "itemTitle":req.body.itemTitle,
+      "itemText":req.body.itemText,
+      "submitter":decoded.user.email,
+      "updates": req.body.updates,
+      "published": req.body.published,
+      "publishedDate": req.body.publishedDate,
+      "email": req.body.email
     };
     let collection = await db.collection("news");
-    // let result = await collection.insertOne(newDocument);
+    let result = await collection.insertOne(newDocument);
+    
     res.send(result).status(204);
   } catch (err) {
     console.error(err);
@@ -148,8 +157,11 @@ router.patch("/:id" ,auth,async (req, res) => {
     const updates = {
       $set: {
         "itemTitle" : req.body.itemTitle,
-        "itemText" : req.body.itemText
+        "itemText" : req.body.itemText,
+        "publishedDate": Date(),
+        
       },
+      $push:{"updates":Date()}
     };
 
     let collection = await db.collection("news");

@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { useLocation } from 'react-router-dom';
+import Modify from './modify'
 import "../loginPage/login.css"
 function edit(){
     const location = useLocation();
@@ -7,18 +7,8 @@ function edit(){
     const id = queryParams.get('id');
     const itemTitle = queryParams.get("itemTitle")
     const itemText = queryParams.get("itemText")
-    const [title,setTitle] = useState(itemTitle);
-    const [text,setText] = useState(itemText);
     
-    function handleTitleChange(event) {
-        setTitle(event.target.value);
-    }
-
-
-    function handleTextChange(event) {
-        setText(event.target.value);
-    }
-    async function handleSave(){
+    async function handleSave(title,text){
         const token = localStorage.getItem('token');
         const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
@@ -43,15 +33,9 @@ function edit(){
         }
     }
     return (
-        <div className="news-flash">
-            <br />
-            <div className={'inputContainer'}>
-            <textarea defaultValue={itemTitle} onChange={handleTitleChange} />
-            </div>
-            <br />
-            <textarea defaultValue={itemText} onChange={handleTextChange} />
-            <br />
-            <button onClick={handleSave}>Save</button>
+        <div>
+            <h1>Edit a post</h1>
+            <Modify itemText={itemText} itemTitle={itemTitle} handleSave={handleSave}/>
         </div>
     )
 }
