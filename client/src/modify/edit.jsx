@@ -1,12 +1,15 @@
 import { useLocation } from 'react-router-dom';
 import Modify from './modify'
 import "../loginPage/login.css"
+import { useNavigate } from 'react-router-dom'
+
 function edit(){
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const id = queryParams.get('id');
     const itemTitle = queryParams.get("itemTitle")
     const itemText = queryParams.get("itemText")
+    const navigateTo = useNavigate();
     
     async function handleSave(title,text){
         const token = localStorage.getItem('token');
@@ -28,6 +31,7 @@ function edit(){
         
         if (res.status== 200){
             window.alert("Editted the post successfully")
+            navigateTo("/");
         } else {
             window.alert("Something went wrong")
         }

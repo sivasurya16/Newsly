@@ -1,8 +1,9 @@
 import Modify from './modify'
 import "../loginPage/login.css"
-
+import { useNavigate } from 'react-router-dom'
 
 function Create(){
+    const navigateTo = useNavigate();
     async function handleSave(title,text){
         const token = localStorage.getItem('token');
         const myHeaders = new Headers();
@@ -31,7 +32,8 @@ function Create(){
         
         
         if (res.status== 200){
-            window.alert("Editted the post successfully")
+            window.alert("Created the post successfully")
+            navigateTo("/")
         } else {
             window.alert("Something went wrong")
         }
