@@ -5,6 +5,7 @@ import NewsFlash from "./news_flash.jsx"
 import axios from "axios"
 import Edit from "../modify/edit.jsx"
 import useAuth from "../loginPage/useAuth.jsx"
+const api = import.meta.env.VITE_SERVER_URL || "";
 
 function frontPage(){
     const {isAdmin} = useAuth()
@@ -17,7 +18,7 @@ function frontPage(){
 
     useEffect(() => {
       function getRecords() {
-        axios.get('https://news-letter-yynp.onrender.com/record/', {
+        axios.get(api, {
             headers: { "x-auth-token": localStorage.getItem("token") }
         })
         .then(response => {

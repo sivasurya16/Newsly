@@ -1,13 +1,14 @@
 import "./news_flash.css"
 import useAuth from "../loginPage/useAuth"
 import { useState } from "react";
+const api = import.meta.env.VITE_SERVER_URL || "";
 function container(props){
     const {isAdmin} = useAuth();
     const { _id, section, itemTitle, itemText, itemLink, tags, createdDate, submitter, updates, published, publishedDate, email } = props.article;
     
     async function handleDelete(){
         const token = localStorage.getItem("token")
-        const res = await fetch(`https://news-letter-yynp.onrender.com/record/${_id}`,{
+        const res = await fetch(`${api}${_id}`,{
             method:"delete",
             headers : {
                 "x-auth-token" : token

@@ -2,6 +2,7 @@ import { useLocation } from 'react-router-dom';
 import Modify from './modify'
 import "../loginPage/login.css"
 import { useNavigate } from 'react-router-dom'
+const api = import.meta.env.VITE_SERVER_URL || "";
 
 function edit(){
     const location = useLocation();
@@ -26,7 +27,7 @@ function edit(){
             body: raw,
             redirect: "follow"
         };
-        const res = await fetch(`https://news-letter-yynp.onrender.com/record/${id}`,requestOptions)
+        const res = await fetch(`${api}${id}`,requestOptions)
         
         
         if (res.status== 200){

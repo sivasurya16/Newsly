@@ -1,5 +1,6 @@
 import { createContext, useEffect, useReducer } from 'react';
 import axios from 'axios';
+const api = import.meta.env.VITE_SERVER_URL || "";
 
 const initialState = {
   isAuthenticated: false,
@@ -41,7 +42,7 @@ export const AuthProvider = ({ children }) => {
 
     if (token) {
       try {
-        const res = await axios.get(`https://news-letter-yynp.onrender.com/record/user/info`,{
+        const res = await axios.get(`${api}user/info`,{
           headers: {
             'x-auth-token': token
           }
@@ -78,7 +79,7 @@ export const AuthProvider = ({ children }) => {
     };
     const body = JSON.stringify({ email, password });
     try {
-      const res = await axios.post(`https://news-letter-yynp.onrender.com/record/login`, body, config);
+      const res = await axios.post(`${api}login`, body, config);
       localStorage.setItem('token', res.data.token);
       await getUserInfo();
     } catch (err) {
@@ -93,7 +94,7 @@ export const AuthProvider = ({ children }) => {
     const body = JSON.stringify({ email, password });
 
     try {
-      const res = await axios.post(`https://news-letter-yynp.onrender.com/record/user`, body, config);
+      const res = await axios.post(`${api}user`, body, config);
       localStorage.setItem('token', res.data.token);
       await getUserInfo();
       window.alert("registered successful");

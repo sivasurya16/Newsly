@@ -1,6 +1,7 @@
 import Modify from './modify'
 import "../loginPage/login.css"
 import { useNavigate } from 'react-router-dom'
+const api = import.meta.env.VITE_SERVER_URL || "";
 
 function Create(){
     const navigateTo = useNavigate();
@@ -28,7 +29,7 @@ function Create(){
             body: raw,
             redirect: "follow"
         };
-        const res = await fetch(`https://news-letter-yynp.onrender.com/record/`,requestOptions)
+        const res = await fetch(`${api}`,requestOptions)
         
         
         if (res.status== 200){
