@@ -49,29 +49,7 @@ cd news_letter
 
 ---
 
-### 2. Setup the Backend
-
-In **Terminal 1:**
-
-```bash
-npm run install-server
-npm run start-server
-```
-
----
-
-### 3. Setup the Frontend
-
-In **Terminal 2:**
-
-```bash
-npm run install-client
-npm run start-client
-```
-
----
-
-### 4. Configure Environment Variables
+### 2. Configure Environment Variables
 
 Create a file named `config.env` in the project root and add the following:
 
@@ -88,6 +66,28 @@ VITE_SERVER_URL=<your_backend_server_url>
 
 Example:
 VITE_SERVER_URL=http://localhost:5050/record/
+```
+
+---
+
+### 3. Setup the Backend
+
+In **Terminal 1:**
+
+```bash
+npm run install-server
+npm run start-server
+```
+
+---
+
+### 4. Setup the Frontend
+
+In **Terminal 2:**
+
+```bash
+npm run install-client
+npm run start-client
 ```
 
 ---
