@@ -1,5 +1,5 @@
 import "./news_flash.css"
-import useAuth from "../loginPage/useAuth"
+import useAuth from "../auth/useAuth"
 import { useState } from "react";
 const api = import.meta.env.VITE_SERVER_URL || "";
 function container(props){
@@ -8,7 +8,7 @@ function container(props){
     
     async function handleDelete(){
         const token = localStorage.getItem("token")
-        const res = await fetch(`${api}${_id}`,{
+        const res = await fetch(`${api}/record/${_id}`,{
             method:"delete",
             headers : {
                 "x-auth-token" : token

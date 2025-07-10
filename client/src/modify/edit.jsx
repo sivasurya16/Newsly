@@ -27,7 +27,7 @@ function edit(){
             body: raw,
             redirect: "follow"
         };
-        const res = await fetch(`${api}${id}`,requestOptions)
+        const res = await fetch(`${api}/record/${id}/`,requestOptions)
         
         
         if (res.status== 200){

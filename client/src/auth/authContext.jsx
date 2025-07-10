@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }) => {
 
     if (token) {
       try {
-        const res = await axios.get(`${api}user/info`,{
+        const res = await axios.get(`${api}/auth/user/info`,{
           headers: {
             'x-auth-token': token
           }
@@ -57,6 +57,8 @@ export const AuthProvider = ({ children }) => {
         });
       } catch (err) {
         console.error(err);
+        logOut();
+
       }
     } else {
       delete axios.defaults.headers.common['x-auth-token'];
@@ -79,7 +81,7 @@ export const AuthProvider = ({ children }) => {
     };
     const body = JSON.stringify({ email, password });
     try {
-      const res = await axios.post(`${api}login`, body, config);
+      const res = await axios.post(`${api}/auth/login`, body, config);
       localStorage.setItem('token', res.data.token);
       await getUserInfo();
     } catch (err) {
@@ -94,16 +96,20 @@ export const AuthProvider = ({ children }) => {
     const body = JSON.stringify({ email, password });
 
     try {
-      const res = await axios.post(`${api}user`, body, config);
-      localStorage.setItem('token', res.data.token);
-      await getUserInfo();
-      window.alert("registered successful");
+      const res = await axios.post(`${api}/auth/register`, body, config);
+      if (res.status == 200 && res.data?.token){
+        localStorage.setItem('token', res.data.token);
+        await getUserInfo();
+        window.alert("registered successful");
+      } else {
+      console.warn("Unexpected response:", res);
+    }
     } catch (err) {
-      console.error(err);
+      console.error(err.response.data.msg);
     }
   };
 
-  const logOut = async (name, email, password) => {
+  const logOut = async () => {
     try {
       localStorage.removeItem('token');
       dispatch({

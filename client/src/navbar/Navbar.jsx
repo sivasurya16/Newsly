@@ -1,5 +1,5 @@
 import viteLogo from '/vite.svg'
-import useAuth from '../loginPage/useAuth'
+import useAuth from '../auth/useAuth'
 import "./Navbar.css"
 function Navbar(){
     const {logOut,isAuthenticated} = useAuth();

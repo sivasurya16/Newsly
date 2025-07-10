@@ -29,7 +29,7 @@ function Create(){
             body: raw,
             redirect: "follow"
         };
-        const res = await fetch(`${api}`,requestOptions)
+        const res = await fetch(`${api}/record/`,requestOptions)
         
         
         if (res.status== 200){

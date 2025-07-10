@@ -4,7 +4,7 @@ import "./front_page.css"
 import NewsFlash from "./news_flash.jsx"
 import axios from "axios"
 import Edit from "../modify/edit.jsx"
-import useAuth from "../loginPage/useAuth.jsx"
+import useAuth from "../auth/useAuth.jsx"
 const api = import.meta.env.VITE_SERVER_URL || "";
 
 function frontPage(){
@@ -18,7 +18,7 @@ function frontPage(){
 
     useEffect(() => {
       function getRecords() {
-        axios.get(api, {
+        axios.get(`${api}/record/`, {
             headers: { "x-auth-token": localStorage.getItem("token") }
         })
         .then(response => {
