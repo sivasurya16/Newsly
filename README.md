@@ -95,7 +95,7 @@ npm run start-client
 ## Notes
 
 * MongoDB should be accessible through your provided `ATLAS_URI`.
-* The frontend will run on `http://localhost:3000` and the backend on `http://localhost:5050`.
+* The frontend will run on port `3000` and the backend on port `5050`.
 * Role-based access control is partially implemented. To set a user as a publisher, you currently need to update the user’s role directly in the database.
 
 ---
