@@ -1,17 +1,18 @@
-import React, { useContext, useEffect, useState } from 'react'
+import { useState } from 'react'
 import "./login.css"
 import useAuth from '../auth/useAuth'
 import { useNavigate } from 'react-router-dom'
-
+import { toast } from 'react-toastify'
 
 const Login = (props) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState('')
-  const {logIn,isAuthenticated} = useAuth();
+  const [buttonClicked, setButtonClicked] = useState(false);
+  const { logIn, isAuthenticated } = useAuth();
   const navigateTo = useNavigate();
-  
+
   const onButtonClick = (e) => {
     e.preventDefault();
     // Set initial error values to empty
@@ -40,9 +41,9 @@ const Login = (props) => {
     }
 
   }
-  
+
   return (
-    
+
     <div className={'mainContainer'}>
       <div className={'titleContainer'}>
         <div>Login</div>
@@ -70,14 +71,21 @@ const Login = (props) => {
       </div>
       <br />
       <div className={'inputContainer'}>
-        <input className={'inputButton'} type="button" onClick={async (event)=>{
-            onButtonClick(event);
-            await logIn(email,password);
-          }} value={'Log in'} />
-          {isAuthenticated && navigateTo("/") }
+        <input className={'inputButton'} type="button" disabled={buttonClicked} onClick={async (event) => {
+          onButtonClick(event);
+          setButtonClicked(true);
+          await toast.promise(
+            logIn(email, password),
+            {
+              pending: 'Logging In',
+            }, []
+          );
+          setButtonClicked(false);
+        }} value={'Log in'} />
+        {isAuthenticated && navigateTo("/")}
       </div>
     </div>
-   
+
   )
 }
 

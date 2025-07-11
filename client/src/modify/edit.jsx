@@ -2,6 +2,9 @@ import { useLocation } from 'react-router-dom';
 import Modify from './modify'
 import "../loginPage/login.css"
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify';
+
+
 const api = import.meta.env.VITE_SERVER_URL || "";
 
 function edit(){
@@ -30,11 +33,11 @@ function edit(){
         const res = await fetch(`${api}/record/${id}/`,requestOptions)
         
         
-        if (res.status== 200){
-            window.alert("Editted the post successfully")
+        if (res.ok){
+            toast.success("Editted the post successfully")
             navigateTo("/");
         } else {
-            window.alert("Something went wrong")
+            toast.error("Something went wrong")
         }
     }
     return (

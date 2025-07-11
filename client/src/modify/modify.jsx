@@ -1,11 +1,11 @@
 import { useState } from "react";
 import "../loginPage/login.css"
+
+
 function Modify(props){
     const [title,setTitle] = useState(props.itemTitle);
     const [text,setText] = useState(props.itemText);
    
-
-    
     function handleTitleChange(event) {
         setTitle(event.target.value);
     }

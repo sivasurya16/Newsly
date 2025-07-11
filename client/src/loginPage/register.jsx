@@ -1,14 +1,19 @@
-import React, { useContext, useEffect, useState } from 'react'
+import { useState } from 'react'
 import "./login.css"
 import useAuth from '../auth/useAuth'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
-function register(){
-    const [email, setEmail] = useState('')
+function register() {
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState('')
-  const {register} = useAuth();
-  
+  const { register } = useAuth();
+  const [buttonClicked, setButtonClicked] = useState(false);
+
+  const navigateTo = useNavigate();
+
   const onButtonClick = (e) => {
     e.preventDefault();
     // Set initial error values to empty
@@ -37,9 +42,9 @@ function register(){
     }
 
   }
-  
+
   return (
-    
+
     <div className={'mainContainer'}>
       <div className={'titleContainer'}>
         <div>Register</div>
@@ -67,14 +72,22 @@ function register(){
       </div>
       <br />
       <div className={'inputContainer'}>
-        <input className={'inputButton'} type="button" onClick={async (event)=>{
-            onButtonClick(event);
-            await register(email,password);
+        <input className={'inputButton'} disabled={buttonClicked} type="button" onClick={async (event) => {
+          onButtonClick(event);
+          setButtonClicked(true);
+          const res = toast.promise(
+            register(email, password),
+            {
+              pending: 'Creating New Account',
+            }, []
+          );
+          setButtonClicked(false);
+          if (await res) navigateTo('/login');
 
-          }} value={'Log in'} />
+        }} value={'Register'} />
       </div>
     </div>
-   
+
   )
 
 }

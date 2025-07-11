@@ -72,6 +72,7 @@ textarea {
   border-radius: 8px;
   border: 1px solid grey;
   padding-left: 8px;
+  margin: 0.75em;
 }
 
 input[type='button'] {
@@ -83,4 +84,9 @@ input[type='button'] {
   font-size: 24px;
   border-radius: 8px;
   cursor: pointer;
+}
+
+input[type='button']:disabled {
+  background: #cccccc ;
+  color: #666666;
 }

@@ -4,19 +4,19 @@ import mongoose from 'mongoose';
 const getAllNews = async (req, res) => {
   try {
     let result = await News.find();
-    res.status(200).json(result);
+    res.json(result);
   } catch (err) {
-    res.status(500).json({ msg: "Error fetching news" });
+    res.status(404).json({ msg: "Error fetching news" });
   }
 }
 
 const getNewsById = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id))
-    return res.status(400).json({ msg: "Invalid Id" });
+    return res.status(404).json({ msg: "Invalid Id" });
 
   const result = await News.findById(id);
-  res.status(200).json(result);
+  res.json(result);
 }
 
 const createNews = async (req, res) => {
@@ -34,15 +34,16 @@ const createNews = async (req, res) => {
       "email": req.body.email
     });
     news.save();
+    res.status(201).json({msg: "Created article successfully"});
   } catch (err) {
-    res.status(500).json({ msg: "Error adding record" });
+    res.status(404).json({ msg: "Error adding record" });
 
   }
 }
 
 const editNews = async (req, res) => {
   try {
-    await News.findByIdAndUpdate(id, {
+    await News.findByIdAndUpdate(req.params.id, {
       $set: {
         itemTitle: req.body.itemTitle,
         itemText: req.body.itemText
@@ -52,17 +53,20 @@ const editNews = async (req, res) => {
       }
     }, { new: true }
     );
+    res.json({msg: "Editted article successfully"});
   } catch (err) {
-    res.status(500).send("Error updating record");
+    res.status(404).json({ msg: "Error updating record" });
   }
 
 }
 
 const deleteNews = async (req, res) => {
   try {
-    await News.findByIdAndDelete(id);
+    const result = await News.findByIdAndDelete(req.params.id);
+    if (result == null) throw Error();
+    res.json({msg: "Deleted article successfully"});
   } catch (err) {
-    res.status(500).send("Error deleting record");
+    res.status(404).json({msg : "Error deleting record"});
   }
 }
 

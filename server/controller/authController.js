@@ -18,25 +18,10 @@ const register = async (req, res) => {
     const hashPassword = await bcrypt.hash(password, salt);
     await User.create({ email: email, password: hashPassword, isAdmin: false });
 
-    // return jwt
-    const payload = {
-      user: {
-        email: email,
-      },
-    };
-
-    jwt.sign(
-      payload,
-      process.env.JWT_SECRET,
-      { expiresIn: '7d' },
-      (err, token) => {
-        if (err) throw err;
-        res.status(200).json({ token });
-      }
-    );
+    res.status(201).json({msg: 'Account created'});
   } catch (err) {
     console.error(err.message);
-    res.status(500).send({ msg: 'Server error' });
+    res.status(400).send({ msg: 'Invalid Fields Provided' });
   }
 }
 
@@ -45,15 +30,14 @@ const login = async (req, res) => {
   try {
     // check if the user exists
     let user = await User.findOne({ email: email });
-    // console.log(user)
     if (!user) {
-      return res.status(200).json({ msg: 'Email or password incorrect' });
+      return res.status(400).json({ msg: 'Email or password incorrect' });
     }
 
     // check is the encrypted password matches
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(200).json({ msg: 'Email or password incorrect' });
+      return res.status(400).json({ msg: 'Email or password incorrect' });
     }
 
     // return jwt
@@ -82,9 +66,9 @@ const getUserInfo = async (req, res) => {
   try {
     let user = await User.findOne({ "email": req.user.email });
     delete user.password;
-    res.status(200).json({ user });
+    res.json({ user });
   } catch (error) {
-    res.status(500).json(error);
+    res.status(403).json(error);
   }
 }
 

@@ -1,6 +1,9 @@
 import Modify from './modify'
 import "../loginPage/login.css"
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify';
+
+
 const api = import.meta.env.VITE_SERVER_URL || "";
 
 function Create(){
@@ -32,11 +35,11 @@ function Create(){
         const res = await fetch(`${api}/record/`,requestOptions)
         
         
-        if (res.status== 200){
-            window.alert("Created the post successfully")
+        if (res.ok){
+            toast.success("Created the post successfully")
             navigateTo("/")
         } else {
-            window.alert("Something went wrong")
+            toast.error("Something went wrong")
         }
     }
     return(
