@@ -81,8 +81,8 @@ function register() {
               pending: 'Creating New Account',
             }, []
           );
-          setButtonClicked(false);
           if (await res) navigateTo('/login');
+          setButtonClicked(false);
 
         }} value={'Register'} />
       </div>

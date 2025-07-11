@@ -5,8 +5,6 @@ const uri = process.env.ATLAS_URI || '';
 const connectDB = async () => {
   try {
     await mongoose.connect(uri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
       dbName: 'news'
     });
 
