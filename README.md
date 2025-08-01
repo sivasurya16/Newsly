@@ -102,6 +102,6 @@ npm run start-client
 
 ## Live Demo
 
-[https://newsletter125.netlify.app/](https://newsletter125.netlify.app/)
+https://newsly125.netlify.app/
 
 ---
