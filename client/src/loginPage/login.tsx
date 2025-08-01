@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import "./login.css"
 import useAuth from '../auth/useAuth'
 import { useNavigate } from 'react-router-dom'
@@ -42,6 +42,12 @@ const Login = (props) => {
 
   }
 
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigateTo("/");
+    }
+  }, [isAuthenticated]);
+
   return (
 
     <div className={'mainContainer'}>
@@ -82,7 +88,7 @@ const Login = (props) => {
           );
           setButtonClicked(false);
         }} value={'Log in'} />
-        {isAuthenticated && navigateTo("/")}
+        {/* {isAuthenticated && navigateTo("/")} */}
       </div>
     </div>
 

@@ -1,6 +1,7 @@
-import { createContext, ReactNode, Reducer, useEffect, useReducer } from 'react';
-import axios, { Axios, AxiosError } from 'axios';
+import { createContext, useEffect, useReducer } from 'react';
+import axios, {  } from 'axios';
 import { toast } from 'react-toastify';
+  
 
 interface State {
   isAuthenticated: boolean,
@@ -34,6 +35,7 @@ const authReducer = (state: State, { type, payload }: authAction): State => {
         ...state,
         isAuthenticated: true,
         user: payload.user,
+        isAdmin: !payload.isAdmin
       };
     case actionType.LOGOUT:
       return {
@@ -69,6 +71,7 @@ export const AuthProvider = ({ children }: any) => {
           }
         });
         // axios.defaults.headers.common['x-auth-token'] = token;
+        // console.log("is admin" , res.data.user.isAdmin);
         dispatch({
           type: actionType.LOGIN,
           payload: {

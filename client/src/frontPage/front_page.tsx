@@ -17,25 +17,20 @@ function frontPage() {
     }
 
     useEffect(() => {
-        function getRecords() {
-            axios.get(`${api}/record/`, {
-                headers: { "x-auth-token": localStorage.getItem("token") }
+        axios.get(`${api}/record/`, {
+            headers: { "x-auth-token": localStorage.getItem("token") }
+        })
+            .then(response => {
+                if (!response.data || !Array.isArray(response.data)) {
+                    toast.error("Invalid response data");
+                    return;
+                }
+                setRecords(response.data);
             })
-                .then(response => {
-                    if (!response.data || !Array.isArray(response.data)) {
-                        toast.error("Invalid response data");
-                        return;
-                    }
-                    setRecords(response.data);
-                })
-                .catch(error => {
-                    toast.error(error.msg);
-                });
-        }
-
-        getRecords();
-        return;
-    }, [records.length, toggle, isAdmin]);
+            .catch(error => {
+                toast.error(error.msg);
+            });
+    }, [records.length, toggle]);
     return (
         <div className="front-page">
             <div className="Subtitle">
