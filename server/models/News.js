@@ -6,6 +6,10 @@ const newsSchema = new mongoose.Schema({
   createdDate: Date,
   itemTitle: String,
   itemText: String,
+  body: {
+    type: mongoose.Schema.Types.Mixed,
+    required: true,
+  },
   submitter: String,
   updates: [Date],
   published: Boolean,

@@ -1,9 +1,9 @@
 .mainContainer {
-    flex-direction: column;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
 
 textarea {
@@ -17,6 +17,7 @@ textarea {
   font-size: 16px;
   resize: none;
 }
+
 
 .titleContainer {
   display: flex;
@@ -60,7 +61,7 @@ textarea {
   justify-content: center;
 }
 
-.inputContainer > .errorLabel {
+.inputContainer>.errorLabel {
   color: red;
   font-size: 12px;
 }
@@ -87,6 +88,6 @@ input[type='button'] {
 }
 
 input[type='button']:disabled {
-  background: #cccccc ;
+  background: #cccccc;
   color: #666666;
 }

@@ -20,11 +20,11 @@ function App() {
             <Router>
                 <Navbar />
                 <Routes>
-                    <Route exact path="" element={<FrontPage />} />
-                    <Route exact path="/login" element={<LoginPage />} />
-                    <Route exact path="/register" element={<RegiserPage />} />
-                    <Route exact path="/edit" element={<Edit />} />
-                    <Route exact path="/create" element={< Create />} />
+                    <Route path="" element={<FrontPage />} />
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/register" element={<RegiserPage />} />
+                    <Route path="/edit" element={<Edit />} />
+                    <Route path="/create" element={< Create />} />
                 </Routes>
             </Router>
             <ToastContainer

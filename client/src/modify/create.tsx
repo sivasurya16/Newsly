@@ -1,51 +1,53 @@
-import { useLocation } from 'react-router-dom';
 import Modify from './modify'
-import "../loginPage/login.css"
+import "./modify.css"
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify';
 
 
 const api = import.meta.env.VITE_SERVER_URL || "";
 
-function edit(){
-    const location = useLocation();
-    const queryParams = new URLSearchParams(location.search);
-    const id = queryParams.get('id');
-    const itemTitle = queryParams.get("itemTitle")
-    const itemText = queryParams.get("itemText")
+function Create(){
     const navigateTo = useNavigate();
-    
     async function handleSave(title,text){
         const token = localStorage.getItem('token');
         const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
         myHeaders.append('x-auth-token', token)
         const raw = JSON.stringify({
+            "section" : "ytd",
+            "tags":[
+                "ytd"
+            ],
+            "createdDate": Date(),
             "itemTitle":title,
-            "itemText":text
+            "itemText":text,
+            "updates": [],
+            "published": true,
+            "publishedDate": Date(),
+            "email": true
         })
         const requestOptions = {
-            method: "PATCH",
+            method: "POST",
             headers: myHeaders,
             body: raw,
             redirect: "follow"
         };
-        const res = await fetch(`${api}/record/${id}/`,requestOptions)
+        const res = await fetch(`${api}/record/`,requestOptions)
         
         
         if (res.ok){
-            toast.success("Editted the post successfully")
-            navigateTo("/");
+            toast.success("Created the post successfully")
+            navigateTo("/")
         } else {
             toast.error("Something went wrong")
         }
     }
-    return (
+    return(
         <div>
-            <h1>Edit a post</h1>
-            <Modify itemText={itemText} itemTitle={itemTitle} handleSave={handleSave}/>
+            <h1>Create a post</h1>
+            <Modify handleSave={handleSave} />
         </div>
     )
 }
 
-export default  edit
+export default Create

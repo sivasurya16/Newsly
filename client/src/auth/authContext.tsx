@@ -1,42 +1,61 @@
-import { createContext, useEffect, useReducer } from 'react';
-import axios from 'axios';
+import { createContext, ReactNode, Reducer, useEffect, useReducer } from 'react';
+import axios, { Axios, AxiosError } from 'axios';
 import { toast } from 'react-toastify';
+
+interface State {
+  isAuthenticated: boolean,
+  user?: string | null,
+  isAdmin: boolean
+}
+
+enum actionType {
+  LOGIN = "LOGIN",
+  LOGOUT = "LOGOUT"
+}
+
+interface authAction {
+  type: actionType,
+  payload: Partial<State>
+}
 
 
 const api = import.meta.env.VITE_SERVER_URL || "";
 
-const initialState = {
+const initialState: State = {
   isAuthenticated: false,
   user: null,
+  isAdmin: false
 };
 
-const authReducer = (state, { type, payload }) => {
+const authReducer = (state: State, { type, payload }: authAction): State => {
   switch (type) {
-    case 'LOGIN':
+    case actionType.LOGIN:
       return {
         ...state,
         isAuthenticated: true,
         user: payload.user,
-        isAdmin: payload.isAdmin,
       };
-    case 'LOGOUT':
+    case actionType.LOGOUT:
       return {
         ...state,
         isAuthenticated: false,
         user: null,
         isAdmin: false
       };
+    default:
+      return state;
   }
 };
 
 const AuthContext = createContext({
   ...initialState,
-  logIn: () => Promise.resolve(),
-  register: () => Promise.resolve(),
-  logOut: () => Promise.resolve(),
+  logIn: async (email: string, password: string) => {},           
+  register: async (email: string, password: string) => false,
+  logOut: async () => {},
 });
 
-export const AuthProvider = ({ children }) => {
+
+export const AuthProvider = ({ children }: any) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
   const getUserInfo = async () => {
@@ -51,7 +70,7 @@ export const AuthProvider = ({ children }) => {
         });
         // axios.defaults.headers.common['x-auth-token'] = token;
         dispatch({
-          type: 'LOGIN',
+          type: actionType.LOGIN,
           payload: {
             user: res.data.user,
             isAdmin: res.data.user.isAdmin,
@@ -65,7 +84,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const logIn = async (email, password) => {
+  const logIn = async (email: string, password: string) => {
     const config = {
       headers: { 'Content-Type': 'application/json' },
     };
@@ -77,11 +96,17 @@ export const AuthProvider = ({ children }) => {
       toast.success("Logged in successfully");
 
     } catch (err) {
-      toast.error(err.response?.data?.msg || "Something went wrong");
+      if (axios.isAxiosError(err)) {
+        toast.error(err.response?.data?.msg || "Something went wrong");
+      } else if (err instanceof Error) {
+        toast.error(err.message);
+      } else {
+        toast.error("An unknown error occurred");
+      }
     }
   };
 
-  const register = async (email, password) => {
+  const register = async (email: string, password: string) => {
     const config = {
       headers: { 'Content-Type': 'application/json' },
     };
@@ -92,7 +117,13 @@ export const AuthProvider = ({ children }) => {
       toast.success(res.data.msg);
       return true;
     } catch (err) {
-      toast.error(err.response?.data?.msg || "Something went wrong");
+      if (axios.isAxiosError(err)) {
+        toast.error(err.response?.data?.msg || "Something went wrong");
+      } else if (err instanceof Error) {
+        toast.error(err.message);
+      } else {
+        toast.error("An unknown error occurred");
+      }
       return false;
     }
   };
@@ -102,10 +133,17 @@ export const AuthProvider = ({ children }) => {
       localStorage.removeItem('token');
       toast.success("Logged Out successfully");
       dispatch({
-        type: 'LOGOUT',
+        type: actionType.LOGOUT,
+        payload: {}
       });
     } catch (err) {
-      toast.error(err);
+      if (axios.isAxiosError(err)) {
+        toast.error(err.response?.data?.msg || "Something went wrong");
+      } else if (err instanceof Error) {
+        toast.error(err.message);
+      } else {
+        toast.error("An unknown error occurred");
+      }
     }
   };
 

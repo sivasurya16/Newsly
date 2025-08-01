@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 import "./front_page.css"
-import NewsFlash from "./news_flash.jsx"
+import NewsFlash from "./news_flash.js"
 import axios from "axios"
 import { toast } from 'react-toastify';
-import useAuth from "../auth/useAuth.jsx"
+import useAuth from "../auth/useAuth.js"
 
 
 const api = import.meta.env.VITE_SERVER_URL || "";
