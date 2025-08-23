@@ -17,7 +17,7 @@ function Modify(props: ModifyProps) {
     // const [body, setBody] = useState(props.body);
 
 
-    function handleTitleChange(event : React.ChangeEvent<HTMLTextAreaElement>) {
+    function handleTitleChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
         setTitle(event.target.value);
     }
 
@@ -26,7 +26,7 @@ function Modify(props: ModifyProps) {
     //     // setText(event.target.value);
     // }
 
-    function handleSubTitleChange(event : React.ChangeEvent<HTMLTextAreaElement>) {
+    function handleSubTitleChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
         setSubTitle(event.target.value);
     }
 

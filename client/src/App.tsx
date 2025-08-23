@@ -2,10 +2,10 @@ import FrontPage from "./components/frontPage/FrontPage";
 import LoginPage from "./components/loginPage/Login";
 import RegiserPage from "./components/loginPage/Register";
 import Navbar from "./components/navbar/Navbar";
-import Edit from "./components/modify/edit";
-import Create from "./components/modify/create";
+import Edit from "./components/modify/Edit";
+import Create from "./components/modify/Create";
 import { ToastContainer,Slide } from "react-toastify";
-import GuestGuard from "./guestGuard";
+import GuestGuard from "./GuestGuard";
 import './index.css'
 import {
     BrowserRouter as Router,

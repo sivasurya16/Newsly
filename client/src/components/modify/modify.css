@@ -24,27 +24,29 @@ textarea {
 
 .input-container {
     display: flex;
-    justify-content: center; 
-    align-items: center;   
+    justify-content: center;
+    align-items: center;
     width: 100%;
     padding-left: 10px;
+
     label {
         flex-basis: 60px;
         /* justify-content: center; */
         /* display: inline-block; */
-        font-weight: bold;  
+        font-weight: bold;
     }
 }
+
 .element {
     width: 100%;
 }
 
 .editor-container {
     border: 1px solid black;
-    margin: 0 1.25rem;   
+    margin: 0 1.25rem;
 }
 
-.control-group{
+.control-group {
     border-bottom: 1px solid black;
     display: flex;
     flex-wrap: wrap;

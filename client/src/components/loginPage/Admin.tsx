@@ -1,5 +1,5 @@
 
-function Admin(){
+function Admin() {
     return (
         <>
         </>

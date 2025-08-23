@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import Modify from './modify';
+import Modify from './Modify';
 // import "./modify.css";
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
