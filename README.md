@@ -1,6 +1,6 @@
 # Newsly – Newsletter Publisher and Viewer
 
-[Live Demo](https://newsletter125.netlify.app/) | [GitHub Repository](https://github.com/sivasurya16/news_letter)
+[Live Demo](https://newsly125.netlify.app/) | [GitHub Repository](https://github.com/sivasurya16/Newsly)
 
 ## Project Overview
 
@@ -102,6 +102,6 @@ npm run start-client
 
 ## Live Demo
 
-[https://newsletter125.netlify.app/](https://newsletter125.netlify.app/)
+https://newsly125.netlify.app/
 
 ---
