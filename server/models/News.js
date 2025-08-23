@@ -5,10 +5,10 @@ const newsSchema = new mongoose.Schema({
   tags: [String],
   createdDate: Date,
   itemTitle: String,
-  itemText: String,
+  // itemText: String,
   body: {
     type: mongoose.Schema.Types.Mixed,
-    required: true,
+    // required: true,
   },
   submitter: String,
   updates: [Date],

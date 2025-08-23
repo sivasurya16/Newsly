@@ -1,7 +1,7 @@
 import { Navigate } from 'react-router-dom';
-import useAuth from './auth/useAuth';
+import useAuth from './components/auth/useAuth';
 
-const GuestGuard = ({ children }) => {
+const GuestGuard = ({ children }: { children: React.Component }) => {
   const { isAuthenticated } = useAuth();
 
   if (!isAuthenticated) {

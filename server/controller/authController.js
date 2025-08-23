@@ -46,7 +46,6 @@ const login = async (req, res) => {
         email: email,
       },
     };
-
     jwt.sign(
       payload,
       process.env.JWT_SECRET,

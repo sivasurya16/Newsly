@@ -16,6 +16,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@tiptap/extension-text-align": "^3.2.1",
+    "@tiptap/extension-text-style": "^3.2.1",
     "server": "file:server"
   }
 }
