@@ -43,11 +43,12 @@ const createNews = async (req, res) => {
 }
 
 const editNews = async (req, res) => {
+  console.log(req.body.body)
   try {
     await News.findByIdAndUpdate(req.params.id, {
       $set: {
         itemTitle: req.body.itemTitle,
-        itemText: req.body.body
+        body: req.body.body
       },
       $push: {
         updates: new Date()
