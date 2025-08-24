@@ -1,11 +1,11 @@
 export interface NewsItem {
-  _id?: string;
+  _id: string;
   section?: string;
   tags?: string[];
   createdDate?: string;
-  itemTitle?: string;
+  itemTitle: string;
   // itemText?: string;
-  body: Object;
+  body: JSON;
   submitter?: string;
   updates?: string[];
   published?: boolean;

@@ -1,6 +1,8 @@
+import { canSetTextAlign } from "@/components/tiptap-ui/text-align-button"
 import type { Node as TiptapNode } from "@tiptap/pm/model"
 import { NodeSelection, Selection, TextSelection } from "@tiptap/pm/state"
 import type { Editor } from "@tiptap/react"
+import axios from "axios"
 
 export const MAX_FILE_SIZE = 5 * 1024 * 1024 // 5MB
 
@@ -286,34 +288,94 @@ export function isNodeTypeSelected(
  * @param abortSignal Optional AbortSignal for cancelling the upload
  * @returns Promise resolving to the URL of the uploaded image
  */
+const api = import.meta.env.VITE_SERVER_URL || "";
+// const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 MB
+
 export const handleImageUpload = async (
   file: File,
   onProgress?: (event: { progress: number }) => void,
   abortSignal?: AbortSignal
 ): Promise<string> => {
-  // Validate file
   if (!file) {
-    throw new Error("No file provided")
+    throw new Error("No file provided");
   }
 
   if (file.size > MAX_FILE_SIZE) {
     throw new Error(
       `File size exceeds maximum allowed (${MAX_FILE_SIZE / (1024 * 1024)}MB)`
-    )
+    );
   }
+  const token = localStorage.getItem('token');
+  const formData = new FormData();
+  formData.append("file", file);
 
-  // For demo/testing: Simulate upload progress. In production, replace the following code
-  // with your own upload implementation.
-  for (let progress = 0; progress <= 100; progress += 10) {
-    if (abortSignal?.aborted) {
-      throw new Error("Upload cancelled")
-    }
-    await new Promise((resolve) => setTimeout(resolve, 500))
-    onProgress?.({ progress })
+  try {
+    const res = await axios.post(
+      `${api}/upload`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "x-auth-token": token
+        },
+        signal: abortSignal, // if you want cancellation
+        onUploadProgress: (progressEvent) => {
+          if (progressEvent.total) {
+            const progress = Math.round(
+              (progressEvent.loaded * 100) / progressEvent.total
+            );
+            onProgress?.({ progress });
+          }
+        },
+      }
+    );
+
+    return res.data.url;
+  } catch (err) {
+    console.error("Upload failed:", err);
+    throw err;
   }
+};
 
-  return "/images/tiptap-ui-placeholder-image.jpg"
-}
+// const api = import.meta.env.VITE_SERVER_URL || "";
+// export const handleImageUpload = async (
+//   file: File,
+//   onProgress?: (event: { progress: number }) => void,
+//   abortSignal?: AbortSignal
+// ): Promise<string> => {
+//   // Validate file
+//   if (!file) {
+//     throw new Error("No file provided")
+//   }
+
+//   if (file.size > MAX_FILE_SIZE) {
+//     throw new Error(
+//       `File size exceeds maximum allowed (${MAX_FILE_SIZE / (1024 * 1024)}MB)`
+//     )
+//   }
+//   const formData = new FormData();
+//   formData.append("file", file);
+
+//   // For demo/testing: Simulate upload progress. In production, replace the following code
+//   // with your own upload implementation.
+//   // for (let progress = 0; progress <= 100; progress += 10) {
+//   //   if (abortSignal?.aborted) {
+//   //     throw new Error("Upload cancelled")
+//   //   }
+//   //   await new Promise((resolve) => setTimeout(resolve, 500))
+//   //   onProgress?.({ progress })
+//   // }
+//   try {
+//     const data = file.bytes();
+//     const res = axios.post(`${api}/upload/${file.name}`, formData, {
+//       headers: { "Content-Type": "multipart/form-data" }
+//     });
+//   } catch (err) {
+
+//   }
+
+//   return "/images/tiptap-ui-placeholder-image.jpg"
+// }
 
 type ProtocolOptions = {
   /**

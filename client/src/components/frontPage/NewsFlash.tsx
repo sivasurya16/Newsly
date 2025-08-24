@@ -3,6 +3,7 @@ import useAuth from "../auth/useAuth";
 import { toast } from 'react-toastify';
 import type { NewsItem } from "@/types/news";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 interface NewsFlashProps {
@@ -14,9 +15,11 @@ const api = import.meta.env.VITE_SERVER_URL || "";
 
 function NewsFlash(props: NewsFlashProps) {
     const { isAdmin } = useAuth();
-    const { _id, itemTitle, body } = props.article;
+    const { _id, itemTitle } = props.article;
+    const navigateTo = useNavigate();
 
-    async function handleDelete() {
+    async function handleDelete(event) {
+        event.stopPropagation();
         const token = localStorage.getItem("token")
         try {
             const res = await axios.delete(`${api}/record/${_id}`, {
@@ -37,12 +40,12 @@ function NewsFlash(props: NewsFlashProps) {
     }
 
     return (
-        <div className="news-flash">
+        <div className="news-flash" onClick={() => navigateTo(`/view/${_id}`)}>
             <h3>{itemTitle}</h3>
             {/* <p>{JSON.stringify(body)}</p> */}
             {isAdmin && <div>
-                <button onClick={handleDelete}>Delete</button>
-                <a href={`./edit?id=${_id}&itemTitle=${itemTitle}&itemText=${JSON.stringify(body)}`}><button>Edit</button></a>
+                <button onClick={(event)=>handleDelete(event)}>Delete</button>
+                <a href={`./edit/${_id}`}><button>Edit</button></a>
             </div>}
         </div>
     )

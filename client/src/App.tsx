@@ -4,7 +4,7 @@ import RegiserPage from "./components/loginPage/Register";
 import Navbar from "./components/navbar/Navbar";
 import Edit from "./components/modify/Edit";
 import Create from "./components/modify/Create";
-import { ToastContainer,Slide } from "react-toastify";
+import { ToastContainer, Slide } from "react-toastify";
 import GuestGuard from "./GuestGuard";
 import './index.css'
 import {
@@ -12,6 +12,7 @@ import {
     Routes,
     Route,
 } from "react-router-dom";
+import NewsDetail from "./components/frontPage/NewsDetail";
 
 
 function App() {
@@ -23,8 +24,10 @@ function App() {
                     <Route path="" element={<FrontPage />} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegiserPage />} />
-                    <Route path="/edit" element={<Edit />} />
-                    <Route path="/create" element={< Create />} />
+                    <Route path="/edit/:id" element={<Edit />} />
+                    <Route path="/create" element={<Create />} />
+                    <Route path="/view/:id" element={<NewsDetail />} />
+                    
                 </Routes>
             </Router>
             <ToastContainer

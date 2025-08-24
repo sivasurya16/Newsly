@@ -11,9 +11,9 @@ function Navbar() {
                 <h1>Newsly</h1>
             </div>
             <div className='Navbar-button-container'>
-                <a href="./"><button>Home</button></a>
-                {!isAuthenticated && <a href="./login"><button>Login</button></a>}
-                {!isAuthenticated && <a href="./register"><button>Register</button></a>}
+                <a href="/"><button>Home</button></a>
+                {!isAuthenticated && <a href="/login"><button>Login</button></a>}
+                {!isAuthenticated && <a href="/register"><button>Register</button></a>}
                 {isAuthenticated && <a><button onClick={logOut}>Logout</button></a>}
             </div>
         </div>

@@ -10,7 +10,7 @@ const saveFile = async (fileName, contents) => {
     try {
         await dbx.filesUpload({ path: unique_filename, contents });
         const res = await dbx.sharingCreateSharedLinkWithSettings({ path: unique_filename });
-        const link = res.result.url;
+        const link = res.result.url + '&raw=1';
         return link;
     } catch (err) {
         console.error(err);

@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 
 const getAllNews = async (req, res) => {
   try {
-    let result = await News.find();
+    let result = await News.find().select("_id section itemTitle");
     res.json(result);
   } catch (err) {
     res.status(404).json({ msg: "Error fetching news" });

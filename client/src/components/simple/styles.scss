@@ -1,3 +1,4 @@
+// @import "../tiptap-node/image-node/image-node.scss";
 /* Basic editor styles */
 .tiptap {
   min-height: 20vh;
@@ -115,6 +116,7 @@
     background-color: grey;
   }
 }
-.control-group {
-  
+.editor-image {
+  display: block;
+  margin: 0 auto;
 }

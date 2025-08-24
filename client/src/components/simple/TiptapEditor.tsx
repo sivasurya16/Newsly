@@ -1,7 +1,7 @@
 import './styles.scss'
 // import * from '@/components/tiptap-icons';
 import { Undo2Icon } from '../tiptap-icons/undo2-icon';
-import { EditorContent, useEditor, Editor, useEditorState } from '@tiptap/react';
+import { EditorContent, useEditor, Editor, useEditorState, EditorContext } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 // import { TextStyleKit } from '@tiptap/extension-text-style';
 import TextAlign from '@tiptap/extension-text-align';
@@ -24,6 +24,29 @@ import { BlockquoteIcon } from '../tiptap-icons/blockquote-icon';
 import { CodeBlockIcon } from '../tiptap-icons/code-block-icon';
 import { ListOrderedIcon } from '../tiptap-icons/list-ordered-icon';
 import { ListIcon } from '../tiptap-icons/list-icon';
+import { MAX_FILE_SIZE, handleImageUpload } from '@/lib/tiptap-utils';
+import { ImageUploadNode } from '../tiptap-node/image-upload-node';
+import { toast } from 'react-toastify';
+import { useImageUpload } from '../tiptap-ui/image-upload-button';
+import { ImagePlusIcon } from '../tiptap-icons/image-plus-icon';
+import Image from '@tiptap/extension-image';
+function CustomImageUploadButton({ editor }: { editor: Editor }) {
+    const { isVisible, isActive, canInsert, handleImage, label } = useImageUpload(
+        {
+            editor,
+            hideWhenUnavailable: true,
+            // onInserted: () => toast.success('Image inserted!'),
+        },
+    )
+
+    if (!isVisible) return null
+
+    return (
+        <button onClick={handleImage} disabled={!canInsert} aria-label={label} aria-pressed={isActive}>
+            <ImagePlusIcon />
+        </button>
+    )
+}
 
 const MenuBar = ({ editor }: { editor: Editor }) => {
     const editorState = useEditorState({
@@ -199,6 +222,15 @@ const MenuBar = ({ editor }: { editor: Editor }) => {
 
                 </button>
             </div>
+            <div className="button-group">
+                {/* <ImageUploadButton
+                    editor={editor}
+                    hideWhenUnavailable={true}
+                    onInserted={() => console.log('Image inserted!')}
+                /> */}
+                <CustomImageUploadButton editor={editor} />
+
+            </div>
             {/* <button onClick={() => editor.chain().focus().unsetAllMarks().run()}>Clear marks</button>
             <button onClick={() => editor.chain().focus().clearNodes().run()}>Clear nodes</button> */}
 
@@ -221,6 +253,18 @@ const TiptapEditor = ({ content, updateContent }: TiptapEditorProps) => {
             TextAlign.configure({
                 types: ['heading', 'paragraph'],
             }),
+            Image.configure({
+                HTMLAttributes: {
+                    class: 'editor-image',
+                },
+            }),
+            ImageUploadNode.configure({
+                accept: 'image/*',
+                maxSize: MAX_FILE_SIZE,
+                limit: 3,
+                upload: handleImageUpload,
+                onError: (error) => toast.error('Upload failed:' + error),
+            }),
         ],
         content,
         editorProps: {
@@ -233,15 +277,15 @@ const TiptapEditor = ({ content, updateContent }: TiptapEditorProps) => {
             updateContent(editor.getJSON());
             console.log("Editor JSON:", editor.getJSON()); // ✅ Logs the correct new value
         },
-    })
 
-
-
+    });
 
     return (
         <div className='editor-container'>
-            <MenuBar editor={editor} />
-            <EditorContent editor={editor} />
+            <EditorContext.Provider value={{ editor }}>
+                <MenuBar editor={editor} />
+                <EditorContent editor={editor} />
+            </EditorContext.Provider>
         </div>
     )
 }
