@@ -4,7 +4,6 @@ import { toast } from 'react-toastify';
 import type { NewsItem } from "@/types/news";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import type { MouseEvent } from "react";
 
 
 interface NewsFlashProps {
