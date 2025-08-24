@@ -57,6 +57,9 @@ Create a file named `config.env` in the project root and add the following:
 ATLAS_URI=<your_mongodb_atlas_uri>
 PORT=5050
 JWT_SECRET=<your_jwt_secret_key>
+DROPBOX_APP_KEY=<redacted>
+DROPBOX_APP_SECRET=<redacted>
+DROPBOX_REFRESH_TOKEN=<redacted>
 ```
 
 Create a file named `.env` in the client folder and add the following:
@@ -65,7 +68,7 @@ Create a file named `.env` in the client folder and add the following:
 VITE_SERVER_URL=<your_backend_server_url>
 
 Example:
-VITE_SERVER_URL=http://localhost:5050/record/
+VITE_SERVER_URL=http://localhost:5050
 ```
 
 ---
@@ -97,7 +100,7 @@ npm run start-client
 * MongoDB should be accessible through your provided `ATLAS_URI`.
 * The frontend will run on port `3000` and the backend on port `5050`.
 * Role-based access control is partially implemented. To set a user as a publisher, you currently need to update the user’s role directly in the database.
-
+* Dropbox is used for file storage currently (can be moved to s3 later if needed). So create an app in dropbox by going to [dropbox-developers](https://www.dropbox.com/developers)
 ---
 
 ## Live Demo

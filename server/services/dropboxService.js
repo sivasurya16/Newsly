@@ -3,7 +3,12 @@ import fetch from 'isomorphic-fetch';
 import { v4 as uuidv4 } from 'uuid';
 
 
-const dbx = new Dropbox({ accessToken: process.env.DROPBOX_API_KEY, fetch });
+const dbx = new Dropbox({
+  clientId: process.env.DROPBOX_APP_KEY,
+  clientSecret: process.env.DROPBOX_APP_SECRET,
+  refreshToken: process.env.DROPBOX_REFRESH_TOKEN,
+  fetch
+});
 
 const saveFile = async (fileName, contents) => {
     const unique_filename = `/${uuidv4()}-${fileName}`;
