@@ -105,6 +105,6 @@ npm run start-client
 
 ## Live Demo
 
-https://newsly125.netlify.app/
-
+stable release : https://newsly125.netlify.app/
+dev release : https://dev--newsly125.netlify.app/
 ---
