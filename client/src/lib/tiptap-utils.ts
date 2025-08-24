@@ -1,4 +1,3 @@
-import { canSetTextAlign } from "@/components/tiptap-ui/text-align-button"
 import type { Node as TiptapNode } from "@tiptap/pm/model"
 import { NodeSelection, Selection, TextSelection } from "@tiptap/pm/state"
 import type { Editor } from "@tiptap/react"

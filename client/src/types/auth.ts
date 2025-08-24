@@ -19,3 +19,9 @@ export interface authAction {
 export interface AuthProviderProps {
   children: ReactNode;
 }
+
+export interface AuthContextType extends State {
+  logIn: (email: string, password: string) => Promise<void>;
+  register: (email: string, password: string) => Promise<boolean>;
+  logOut: () => Promise<void>;
+}

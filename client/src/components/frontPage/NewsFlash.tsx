@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import type { NewsItem } from "@/types/news";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import type { MouseEvent } from "react";
 
 
 interface NewsFlashProps {
@@ -18,7 +19,7 @@ function NewsFlash(props: NewsFlashProps) {
     const { _id, itemTitle } = props.article;
     const navigateTo = useNavigate();
 
-    async function handleDelete(event) {
+    async function handleDelete(event: React.MouseEvent<HTMLButtonElement>) {
         event.stopPropagation();
         const token = localStorage.getItem("token")
         try {
@@ -44,8 +45,8 @@ function NewsFlash(props: NewsFlashProps) {
             <h3>{itemTitle}</h3>
             {/* <p>{JSON.stringify(body)}</p> */}
             {isAdmin && <div>
-                <button onClick={(event)=>handleDelete(event)}>Delete</button>
-                <a href={`./edit/${_id}`}><button>Edit</button></a>
+                <button onClick={(event) => handleDelete(event)}>Delete</button>
+                <a href={`/edit/${_id}`} onClick={(event) => event.stopPropagation()}><button>Edit</button></a>
             </div>}
         </div>
     )

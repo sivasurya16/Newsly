@@ -12,7 +12,7 @@ interface ModifyProps {
 
 function Modify(props: ModifyProps) {
     const [title, setTitle] = useState<string>(props.itemTitle);
-    const [subTitle, setSubTitle] = useState<string>(props.itemSubTitle);
+    const [_subTitle, setSubTitle] = useState<string>(props.itemSubTitle);
     const [jsonContent, setJsonContent] = useState<JSON>(props.itemText);
     // const [body, setBody] = useState(props.body);
 

@@ -5,7 +5,6 @@ import Navbar from "./components/navbar/Navbar";
 import Edit from "./components/modify/Edit";
 import Create from "./components/modify/Create";
 import { ToastContainer, Slide } from "react-toastify";
-import GuestGuard from "./GuestGuard";
 import './index.css'
 import {
     BrowserRouter as Router,

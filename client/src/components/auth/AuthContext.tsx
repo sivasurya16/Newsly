@@ -1,7 +1,7 @@
 import { createContext, useEffect, useReducer } from 'react';
 import axios, { } from 'axios';
 import { toast } from 'react-toastify';
-import { actionType, type authAction, type AuthProviderProps, type State } from '@/types/auth';
+import { actionType, type authAction, type AuthContextType, type AuthProviderProps, type State } from '@/types/auth';
 
 const api = import.meta.env.VITE_SERVER_URL || "";
 
@@ -32,13 +32,14 @@ const authReducer = (state: State, { type, payload }: authAction): State => {
   }
 };
 
-const AuthContext = createContext({
+const defaultContext: AuthContextType = {
   ...initialState,
-  logIn: async (email: string, password: string) => { },
-  register: async (email: string, password: string) => false,
+  logIn: async () => { },
+  register: async () => false,
   logOut: async () => { },
-});
+};
 
+const AuthContext = createContext<AuthContextType>(defaultContext);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
