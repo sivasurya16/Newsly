@@ -47,7 +47,7 @@ const editNews = async (req, res) => {
     await News.findByIdAndUpdate(req.params.id, {
       $set: {
         itemTitle: req.body.itemTitle,
-        itemText: req.body.itemText
+        itemText: req.body.body
       },
       $push: {
         updates: new Date()
