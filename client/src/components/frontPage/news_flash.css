@@ -8,3 +8,7 @@
     backdrop-filter: saturate(180%) blur(5px);
     width: 95%;
 }
+
+.news-flash > h3 {
+    word-wrap: break-word;
+}
