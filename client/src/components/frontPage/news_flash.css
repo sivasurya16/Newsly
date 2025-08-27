@@ -1,9 +1,10 @@
 .news-flash {
     border: 2px dashed #20a212;
     box-sizing: border-box;
-    margin: 20px;
+    margin: 10px 2.5%;
     padding-left: 10px;
     border-radius: 5px;
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: saturate(180%) blur(5px);
+    width: 95%;
 }
